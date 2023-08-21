@@ -1,0 +1,82 @@
+# PARAMETERS FOR TEST RUN mahesh.rajamani@datastax.com, vector-test, 92cd50cc-4401-449c-9e77-4d39458c0d75:
+download_url: https://github.com/maheshrajamani/testing-my-repo/raw/main/secure-connect-v21-test-ingress.zip
+provider: ec2
+zone: us-west-2
+instance: m5.2xlarge
+token: token
+workload_duration: 5m
+keyspace: purchase_database
+workload_file: https://raw.githubusercontent.com/nosqlbench/nosqlbench/main/adapter-cqld4/src/main/resources/activities/baselines/cql-vector-typed.yaml
+
+
+ensemble:
+  server:
+    node.count: 1
+    provisioner:
+      name: existing_astra
+      properties:
+        bundle_download_url: {{download_url}}
+        keyspace: {{keyspace}}
+        username: token
+        password: <<secret:{{token}}>>
+        token: <<secret:{{token}}>>
+
+  client:
+    node.count: 1
+    provisioner:
+      name: ctool
+      properties:
+        cloud.provider: {{provider}}
+        cloud.region: {{zone}}
+        cloud.instance.type: {{instance}}
+    configuration_manager:
+      - name: nosqlbench_ssh
+        properties:
+          version: 5.17.3-release
+
+workload:
+  phases:
+
+    - set_schema:
+        module: nosqlbench
+        properties:
+          client.size: 1
+          alias: schema
+          args:
+            - driver=cqld4
+            - yaml={{workload_file}}
+            - tags=block:schema
+
+    - rampup:
+        module: nosqlbench
+        properties:
+          cycles: 1B # more cycles than can be executed within main_duration
+          alias: rampup
+          duration: {{workload_duration}}
+          args:
+            - driver=cqld4
+            - yaml={{workload_file}}
+            - tags=block:rampup
+            - threads=2000
+            - pooling=16:16:1024
+            - errors=histogram
+    - main:
+        module: nosqlbench
+        properties:
+          cycles: 1B # more cycles than can be executed within main_duration
+          alias: main
+          duration: {{workload_duration}}
+          args:
+            - driver=cqld4
+            - yaml={{workload_file}}
+            - tags=block:main.*
+            - threads=2000
+            - pooling=16:16:1024
+            - errors=histogram
+
+  checkers:
+    verify_success:
+      checker: nofail
+  artifact_checkers:
+    generate_chart:
+      artifact_checker: hdrtool
