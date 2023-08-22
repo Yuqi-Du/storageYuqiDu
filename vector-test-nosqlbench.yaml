@@ -33,7 +33,8 @@ bindings:
   request_id: ToHashedUUID(); ToString();
 
   # autogenerate auth token to use on API calls using configured uri/uid/password, unless one is provided
-  token: "AstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549"
+#  token: "AstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549"
+  token: <<token:>>
 #  Discard(); Token('<<auth_token:>>','<<uri:http://localhost:8081/v1/auth>>', '<<uid:cassandra>>', '<<pswd:cassandra>>');
 
   seq_key: Mod(<<docscount:500>>); ToString() -> String
