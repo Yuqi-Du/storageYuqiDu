@@ -60,7 +60,7 @@ blocks:
 
       create-collection:
         method: POST
-        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>
+        uri: <<protocol:http>>://{weighted_hosts}<<path_prefix:>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>
         Accept: "application/json"
         X-Cassandra-Request-Id: "{request_id}"
         X-Cassandra-Token: "{token}"
