@@ -12,10 +12,10 @@ description: >2
 scenarios:
   default:
     schema-collection:   run driver=http tags==block:schema-collection threads==1 cycles==UNDEF
-#    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-#    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-#    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-#    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 
 bindings:
   # To enable an optional weighted set of hosts in place of a load balancer
@@ -25,7 +25,6 @@ bindings:
   #   multiple weighted hosts: jsonapi_host=host1:3,host2:7
   weighted_hosts: WeightedStrings('<<stargate_host:jsonapi>>')
 
-
   # spread into different spaces to use multiple connections
   space: HashRange(1,<<connections:20>>); ToString();
 
@@ -33,8 +32,6 @@ bindings:
   request_id: ToHashedUUID(); ToString();
 
   # autogenerate auth token to use on API calls using configured uri/uid/password, unless one is provided
-#  token: "AstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549"
-#  token: <<token:>>
   token: Discard(); Token('<<auth_token:>>','<<uri:http://localhost:8081/v1/auth>>', '<<uid:cassandra>>', '<<pswd:cassandra>>');
 
   seq_key: Mod(<<docscount:500>>); ToString() -> String
