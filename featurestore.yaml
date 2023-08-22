@@ -1,0 +1,78 @@
+min_version: "4.17.15"
+scenarios:
+  featurestore:
+    truncate: run driver=cql tags==block:truncate threads==1 cycles==UNDEF
+    schema: run driver=cql tags==block:schema threads==1 cycles==UNDEF
+    rampup: run driver=cql tags==block:rampup cycles===TEMPLATE(rampup_cycles,10m) threads=auto
+    main: run driver=cql tags==block:"main.*" cycles===TEMPLATE(main_cycles,100M) threads=auto
+
+params:
+  instrument: true
+
+bindings:
+  id: Mul(17L); HashRange(0, TEMPLATE(part_count, 1000000000L)); HashedToByteBuffer(TEMPLATE(payloadsize, 10)); ToBase64();
+  ad_segment: WeightedStrings('A:10;B:10;C:1,D:10;E:10;F:1,G:10;H:10;I:1,J:10;K:10;L:1,M:10;N:10;O:1,P:10;Q:10;R:1,S:10;');
+  gender: WeightedStrings('M:10;F:10;O:1');
+  install_source: WeightedStrings('appstore:10;googleplay:10;other:1');
+  manufacturer: WeightedStrings('apple:10;google:10;other:1');
+  mobile_brand: WeightedStrings('apple:10;google:10;other:1');
+  order_stage: WeightedStrings('new:50,active:30,retained:10,lost:10');
+  region: WeightedStrings('us:10,eu:10,asia:1');
+  segment_2: Mul(37L); HashedToByteBuffer(TEMPLATE(payloadsize, 10)); ToBase64();
+  user_ratios : Mul(91L); HashedToByteBuffer(TEMPLATE(payloadsize, 10)); ToBase64();
+  limit: FixedValue(TEMPLATE(limit,1)); ToInt();
+
+blocks:
+  schema:
+    params:
+      prepared: false
+    ops:
+      create-table: |
+        CREATE TABLE IF NOT EXISTS TEMPLATE(keyspace,baselines).TEMPLATE(table,user_feature) (
+          id text PRIMARY KEY,
+          ad_segment text,
+          gender text,
+          install_source text,
+          manufacturer text,
+          mobile_brand text,
+          order_stage text,
+          region text,
+          segment_2 text,
+          user_ratios text
+        );
+  rampup:
+    params:
+      cl: TEMPLATE(write_cl,LOCAL_QUORUM)
+    ops:
+      rampup-insert-1field: |
+        insert into TEMPLATE(keyspace,baselines).TEMPLATE(table,user_feature)
+        (id, ad_segment,gender, install_source, manufacturer, mobile_brand, order_stage, region, segment_2, user_ratios)
+        values ({id}, {ad_segment}, {gender}, {install_source}, {manufacturer}, {mobile_brand}, {order_stage}, {region}, {segment_2}, {user_ratios});
+
+  truncate:
+    params:
+      prepared: false
+    ops:
+      truncate: |
+        truncate table TEMPLATE(keyspace,baselines).TEMPLATE(table,user_feature);
+  main-read:
+    params:
+      instrument: true
+      ratio: 20
+    tags:
+      phase: main
+    ops:
+      main-read: |
+        select * from TEMPLATE(keyspace,baselines).TEMPLATE(table,user_feature) where id={id} limit {limit};
+  main-write:
+    tags:
+      phase: main
+    params:
+      instrument: true
+      ratio: 1
+      cl: TEMPLATE(write_cl,LOCAL_QUORUM)
+    ops:
+      main-write: |
+        insert into TEMPLATE(keyspace,baselines).TEMPLATE(table,user_feature)
+        (id, ad_segment,gender, install_source, manufacturer, mobile_brand, order_stage, region, segment_2, user_ratios)
+        values ({id}, {ad_segment}, {gender}, {install_source}, {manufacturer}, {mobile_brand}, {order_stage}, {region}, {segment_2}, {user_ratios});
