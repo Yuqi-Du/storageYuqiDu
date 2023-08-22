@@ -1,7 +1,9 @@
 min_version: "5.17.3"
 
-# Example command line (when Stargate is running on localhost):
+
 # nb5 -v http-jsonapi-vector-crud jsonapi_host=localhost docscount=500 threads=20
+# nb5 -v vector-test-to-astra docscount=500 threads=20 auth_token=AstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549 jsonapi_port=443
+
 
 description: >2
   This workload emulates vector CRUD operations for Stargate JSON API.
@@ -11,7 +13,7 @@ description: >2
 
 scenarios:
   default:
-    schema-collection:   run driver=http tags==block:schema-collection threads==1 cycles==UNDEF
+    schema:   run driver=http tags==block:schema threads==1 cycles==UNDEF
     write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 #    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 #    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
@@ -23,7 +25,7 @@ bindings:
   #   single host: jsonapi_host=host1
   #   multiple hosts: jsonapi_host=host1,host2,host3
   #   multiple weighted hosts: jsonapi_host=host1:3,host2:7
-  weighted_hosts: WeightedStrings('<<stargate_host:jsonapi>>')
+  weighted_hosts: WeightedStrings('<<jsonapi_host:22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com>>')
 
   # spread into different spaces to use multiple connections
   space: HashRange(1,<<connections:20>>); ToString();
@@ -38,10 +40,24 @@ bindings:
   random_key: Uniform(0,<<docscount:500>>); ToString() -> String
   vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
 
-
 blocks:
-  schema-collection:
+  schema:
     ops:
+#      create-namespace:
+#        method: POST
+#        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1
+#        Accept: "application/json"
+#        X-Cassandra-Request-Id: "{request_id}"
+#        X-Cassandra-Token: "{token}"
+#        Content-Type: "application/json"
+#        ok-body: ".*\"ok\":1.*"
+#        body: >2
+#          {
+#            "createNamespace": {
+#              "name": "<<namespace:jsonapi_vector_crud_namespace>>"
+#            }
+#          }
+
       delete-collection:
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>

@@ -1,0 +1,509 @@
+2023-08-22 23:03:52,695 [main] INFO : Configured scenario log at logs/scenario_20230822_160352_575.log
+2023-08-22 23:03:52,697 [main] INFO : Running NoSQLBench Version 5.17.3-release
+2023-08-22 23:03:52,697 [main] INFO : command-line: -v vector-test-to-astra docscount=50 threads=20 auth_token=AstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549 jsonapi_port=443 protocol=https path_prefix==/api/json
+2023-08-22 23:03:53,044 [main] INFO : client-hardware: {"memory-GiB":"32.00","processor-name":"Apple M1 Pro","heap-max-GiB":"8.00","if-speeds":["0Mib","826Mib","9Mib","261Mib"],"physical-cores":"10","max-frequency-ghz":"0.00","logical-cores":"10","sockets":"1"}
+2023-08-22 23:03:53,155 [main] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/vector-test-to-astra.yaml'
+2023-08-22 23:03:53,191 [main] INFO : {"layer":"CLI","start":1692745433189,"end":1692745433189,"labels":{"layer":"CLI","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"cli":"-v\nvector-test-to-astra\ndocscount\u003d50\nthreads\u003d20\nauth_token\u003dAstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549\njsonapi_port\u003d443\nprotocol\u003dhttps\npath_prefix\u003d\u003d/api/json"}}
+2023-08-22 23:03:53,192 [main] INFO : console logging level is INFO
+2023-08-22 23:03:53,197 [main] INFO : Charting disabled
+2023-08-22 23:03:53,198 [scenarios:001] INFO : {"layer":"Scenario","start":1692745433198,"end":1692745433198,"labels":{"layer":"Scenario","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"engine":"Graalvm"}}
+2023-08-22 23:03:53,733 [scenarios:001] INFO : {"layer":"Activity","start":1692745433731,"end":1692745433731,"labels":{"layer":"Activity","alias":"vectortesttoastra_default_schema","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"command":"run","params":"ActivityDef:(1)/{protocol\u003dhttps, driver\u003dhttp, threads\u003d1, workload\u003dvector-test-to-astra, alias\u003dvectortesttoastra_default_schema, auth_token\u003dAstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549, jsonapi_port\u003d443, tags\u003dblock:schema, docscount\u003d50, path_prefix\u003d\u003d/api/json}"}}
+2023-08-22 23:03:53,740 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/vector-test-to-astra.yaml'
+2023-08-22 23:03:53,755 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/vector-test-to-astra.yaml'
+2023-08-22 23:03:53,939 [ACTIVITY:001] INFO : defaulting stride to 3 (the sequence length)
+2023-08-22 23:03:53,939 [ACTIVITY:001] INFO : defaulting cycles to 3 (the stride length)
+2023-08-22 23:03:53,940 [ACTIVITY:001] INFO : setting threads to 1 (direct)
+2023-08-22 23:03:53,943 [ACTIVITY:001] INFO : starting activity vectortesttoastra_default_schema for cycles [0..3)=3
+2023-08-22 23:03:53,943 [ACTIVITY:001] INFO : {"layer":"Activity","start":1692745433943,"end":1692745433943,"labels":{"layer":"Activity","alias":"vectortesttoastra_default_schema","driver":"http","workload":"vector-test-to-astra","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"params":"ActivityDef:(6)/{driver\u003dhttp, threads\u003d1, workload\u003dvector-test-to-astra, alias\u003dvectortesttoastra_default_schema, cycles\u003d3, stride\u003d3, tags\u003dblock:schema}"}}
+2023-08-22 23:03:53,973 [scenarios:001] INFO : {"layer":"Activity","start":1692745433973,"end":1692745433973,"labels":{"layer":"Activity","alias":"vectortesttoastra_default_write","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"command":"run","params":"ActivityDef:(1)/{workload\u003dvector-test-to-astra, threads\u003d20, cycles\u003d50, tags\u003dname:\"write.*\", path_prefix\u003d\u003d/api/json, protocol\u003dhttps, driver\u003dhttp, alias\u003dvectortesttoastra_default_write, auth_token\u003dAstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549, jsonapi_port\u003d443, errors\u003dtimer,warn, docscount\u003d50}"}}
+2023-08-22 23:03:53,976 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/vector-test-to-astra.yaml'
+2023-08-22 23:03:53,974 [vectortesttoastra_default_schema:001] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1
+java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:53,980 [vectortesttoastra_default_schema:001] ERROR: Uncaught exception in thread 'vectortesttoastra_default_schema:001, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_schema': java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1
+2023-08-22 23:03:53,980 [vectortesttoastra_default_schema:001] INFO : stopping activity vectortesttoastra_default_schema:Errored:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(0) ⚠(1)
+2023-08-22 23:03:53,981 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/vector-test-to-astra.yaml'
+2023-08-22 23:03:53,981 [vectortesttoastra_default_schema:001] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,030 [ACTIVITY:001] INFO : defaulting stride to 5 (the sequence length)
+2023-08-22 23:03:54,030 [ACTIVITY:001] INFO : setting threads to 20 (direct)
+2023-08-22 23:03:54,031 [ACTIVITY:001] INFO : starting activity vectortesttoastra_default_write for cycles [0..50)=50
+2023-08-22 23:03:54,031 [ACTIVITY:001] INFO : {"layer":"Activity","start":1692745434031,"end":1692745434031,"labels":{"layer":"Activity","alias":"vectortesttoastra_default_write","driver":"http","workload":"vector-test-to-astra","session":"scenario_20230822_160352_575","span":"instant","appname":"nosqlbench"},"details":{"params":"ActivityDef:(6)/{workload\u003dvector-test-to-astra, threads\u003d20, cycles\u003d50, stride\u003d5, tags\u003dname:\"write.*\", driver\u003dhttp, alias\u003dvectortesttoastra_default_write, errors\u003dtimer,warn}"}}
+2023-08-22 23:03:54,054 [vectortesttoastra_default_write:007] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,054 [vectortesttoastra_default_write:008] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 5: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 5: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,054 [vectortesttoastra_default_write:009] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 15: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 15: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,058 [vectortesttoastra_default_write:007] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:007, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 0: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,058 [vectortesttoastra_default_write:009] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:009, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 15: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,060 [vectortesttoastra_default_write:007] INFO : stopping activity vectortesttoastra_default_write:Starting:⌀(0) ⏫(0) ⏵(7) ⏬(0) ⏹(0) ⏯(10) ⚠(3)
+2023-08-22 23:03:54,060 [vectortesttoastra_default_write:008] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:008, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 5: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,060 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,060 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,060 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:007] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,061 [vectortesttoastra_default_write:008] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(3) ⏹(0) ⏯(10) ⚠(7)
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 4: from non Running state:Stopping
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 5: from non Running state:Stopping
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 9: from non Running state:Stopping
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,062 [vectortesttoastra_default_write:008] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(3) ⏹(0) ⏯(10) ⚠(7)
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 4: from non Running state:Stopping
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 5: from non Running state:Stopping
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 9: from non Running state:Stopping
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,063 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,064 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,064 [vectortesttoastra_default_write:009] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,103 [vectortesttoastra_default_write:002] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 30: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 30: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,103 [vectortesttoastra_default_write:003] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 25: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 25: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,103 [vectortesttoastra_default_write:001] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 40: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 40: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,103 [vectortesttoastra_default_write:004] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 10: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 10: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,105 [vectortesttoastra_default_write:002] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:002, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 30: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,106 [vectortesttoastra_default_write:004] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:004, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 10: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,106 [vectortesttoastra_default_write:010] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 20: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 20: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,106 [vectortesttoastra_default_write:005] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 45: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 45: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,106 [vectortesttoastra_default_write:006] ERROR: Error in core motor loop:java.lang.RuntimeException: while binding request in cycle 35: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+java.lang.RuntimeException: while binding request in cycle 35: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:82) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.motor.CoreMotor.run(CoreMotor.java:393) [nb5.jar:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+Caused by: java.lang.IllegalArgumentException: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+	at jdk.internal.net.http.common.Utils.newIAE(Utils.java:286) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.checkURI(HttpRequestBuilderImpl.java:85) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:71) ~[java.net.http:?]
+	at jdk.internal.net.http.HttpRequestBuilderImpl.uri(HttpRequestBuilderImpl.java:43) ~[java.net.http:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$4(HttpOpDispenser.java:79) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFuncOptionally$3(ParsedOp.java:821) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.templating.ParsedOp.lambda$enhanceFunc$2(ParsedOp.java:796) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$10(HttpOpDispenser.java:104) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.lambda$getOpFunc$11(HttpOpDispenser.java:117) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:127) ~[nb5.jar:?]
+	at io.nosqlbench.adapter.http.core.HttpOpDispenser.apply(HttpOpDispenser.java:32) ~[nb5.jar:?]
+	at io.nosqlbench.engine.api.activityimpl.uniform.actions.StandardAction.runCycle(StandardAction.java:80) ~[nb5.jar:?]
+	... 4 more
+2023-08-22 23:03:54,107 [vectortesttoastra_default_write:001] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:001, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 40: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,108 [vectortesttoastra_default_write:004] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,108 [vectortesttoastra_default_write:003] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:003, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 25: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,111 [vectortesttoastra_default_write:006] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:006, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 35: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,112 [vectortesttoastra_default_write:010] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:010, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 20: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,112 [vectortesttoastra_default_write:005] ERROR: Uncaught exception in thread 'vectortesttoastra_default_write:005, state[RUNNABLE], notifying executor 'ActivityExecutor~vectortesttoastra_default_write': java.lang.RuntimeException: while binding request in cycle 45: unsupported URI https://22e8a1db-50cc-400f-91e8-42d57b2a6dc5-us-west-2.apps.astra-dev.datastax.com:443=/api/json/v1/jsonapi_vector_crud_namespace/jsonapi_vector_crud_collection
+2023-08-22 23:03:54,112 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,113 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:004] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:006] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,114 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:006] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,115 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:010] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,116 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:005] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:003] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,117 [vectortesttoastra_default_write:001] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:001] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] INFO : stopping activity vectortesttoastra_default_write:Stopping:⌀(0) ⏫(0) ⏵(0) ⏬(0) ⏹(0) ⏯(10) ⚠(10)
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 0: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 1: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 2: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 3: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 4: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 5: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 6: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 7: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 8: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 9: from non Running state:Errored
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 10: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 11: from non Running state:Finished
+2023-08-22 23:03:54,118 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 12: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 13: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 14: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 15: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 16: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 17: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 18: from non Running state:Finished
+2023-08-22 23:03:54,119 [vectortesttoastra_default_write:002] WARN : attempted to stop motor 19: from non Running state:Finished
+2023-08-22 23:04:53,284 [ProgressIndicator/logonly:1m] INFO : vectortesttoastra_default_write (remaining,active,completed)=(40,0,10) 020%
+2023-08-22 23:04:53,285 [ProgressIndicator/logonly:1m] INFO : vectortesttoastra_default_schema (remaining,active,completed)=(2,0,1) 033%
+2023-08-22 23:05:51,252 [Thread-2] WARN : Scenario was interrupted by process exit, shutting down
+2023-08-22 23:05:51,253 [Thread-2] INFO : scenario state: Interrupted
+2023-08-22 23:05:51,254 [Thread-2] INFO : {"layer":"Scenario","start":1692745433198,"end":1692745551252,"labels":{"layer":"Scenario","state":"Interrupted","session":"scenario_20230822_160352_575","span":"interval","appname":"nosqlbench"},"details":{"command_line":"-v\nvector-test-to-astra\ndocscount\u003d50\nthreads\u003d20\nauth_token\u003dAstraCS:OTCvFjqTgAIaYWBQcCUCymau:9b047725e66c58325f34df3d88cf1b2bcafaeaaccf9fd0c38c1c86cac5770549\njsonapi_port\u003d443\nprotocol\u003dhttps\npath_prefix\u003d\u003d/api/json"}}
