@@ -1,0 +1,157 @@
+# PARAMETERS FOR TEST RUN kathiresan.selvaraj@datastax.com, fallout-nb5-json-crud-basic, c348d028-eadb-404e-8870-042869170eff:
+workload: keyvalue
+m_w_cycles: 100000
+m_r_cycles: 100000
+m_u_cycles: 100000
+m_d_cycles: 100000
+astra_provider: aws
+astra_region: eu-west-1
+keyspace: my_jsonapi_ks
+client_count: 1
+client_provider: ec2
+client_region: eu-west-1
+client_type: m5.2xlarge
+write_connections: 30
+read_connections: 30
+update_connections: 30
+delete_connections: 30
+
+# DEFAULT PARAMETERS:
+# # PARAMETERS FOR TEST RUN kathiresan.selvaraj@datastax.com, fallout-nb5-rest, 9573d851-6b29-475b-85ed-d56db4eb4f54:
+# workload: keyvalue
+# m_w_cycles: 10000
+# m_r_cycles: 10000
+# m_u_cycles: 10000
+# m_d_cycles: 10000
+# astra_provider: aws
+# astra_region: eu-west-1
+# keyspace: my_jsonapi_ks
+# client_count: 1
+# client_provider: ec2
+# client_region: eu-west-1
+# client_type: m5.2xlarge
+# write_connections: 5
+# read_connections: 5
+# update_connections: 5
+# delete_connections: 5
+---
+
+ensemble:
+  server:
+    node.count: 1
+    provisioner:
+      name: astra
+      properties:
+        cloud.provider: {{astra_provider}}
+        cloud.region: {{astra_region}}
+        keyspace: {{keyspace}}
+        settle_time: 120
+
+  client:
+    node.count: {{client_count}}
+    provisioner:
+      name: ctool
+      properties:
+        cloud.provider: {{client_provider}}
+        cloud.region: {{client_region}}
+        cloud.instance.type: {{client_type}}
+    configuration_manager:
+      - name: nosqlbench_ssh
+        properties:
+          version: 5.17.2-release
+
+workload:
+  phases:
+    - nb_set_schema:
+        module: nosqlbench
+        properties:
+          client.size: 1
+          alias: schema
+          service_type: stargate
+          args:
+            - driver=http
+            - workload=https://gist.githubusercontent.com/kathirsvn/3cb07dd74bc20d0e079da432efc4e340/raw/d56646dcb8b14ab70dc4843908e336dc38ae9b53/http-jsonapi-crud-basic.yaml
+            - tags=block:schema-astra
+            - namespace={{keyspace}}
+            - protocol=https
+            - jsonapi_port=443
+            - path_prefix=/api/json
+    - main-write:
+        module: nosqlbench
+        properties:
+          alias: main
+          service_type: stargate
+          cycles: {{m_w_cycles}}
+          args:
+            - driver=http
+            - workload=https://gist.githubusercontent.com/kathirsvn/3cb07dd74bc20d0e079da432efc4e340/raw/d56646dcb8b14ab70dc4843908e336dc38ae9b53/http-jsonapi-crud-basic.yaml
+            - tags=block:write
+            - threads=20
+            - errors=histogram
+            - namespace={{keyspace}}
+            - protocol=https
+            - jsonapi_port=443
+            - path_prefix=/api/json
+            - connections={{write_connections}}
+            - docscount={{m_w_cycles}}
+    - main-read:
+        module: nosqlbench
+        properties:
+          alias: main
+          service_type: stargate
+          cycles: {{m_r_cycles}}
+          args:
+            - driver=http
+            - workload=https://gist.githubusercontent.com/kathirsvn/3cb07dd74bc20d0e079da432efc4e340/raw/d56646dcb8b14ab70dc4843908e336dc38ae9b53/http-jsonapi-crud-basic.yaml
+            - tags=block:read
+            - threads=20
+            - errors=histogram
+            - namespace={{keyspace}}
+            - protocol=https
+            - jsonapi_port=443
+            - path_prefix=/api/json
+            - connections={{read_connections}}
+            - docscount={{m_r_cycles}}
+    - main-update:
+        module: nosqlbench
+        properties:
+          alias: main
+          service_type: stargate
+          cycles: {{m_u_cycles}}
+          args:
+            - driver=http
+            - workload=https://gist.githubusercontent.com/kathirsvn/3cb07dd74bc20d0e079da432efc4e340/raw/d56646dcb8b14ab70dc4843908e336dc38ae9b53/http-jsonapi-crud-basic.yaml
+            - tags=block:update
+            - threads=20
+            - errors=histogram
+            - namespace={{keyspace}}
+            - protocol=https
+            - jsonapi_port=443
+            - path_prefix=/api/json
+            - connections={{update_connections}}
+            - docscount={{m_u_cycles}}
+    - main-delete:
+        module: nosqlbench
+        properties:
+          alias: main
+          service_type: stargate
+          cycles: {{m_d_cycles}}
+          args:
+            - driver=http
+            - workload=https://gist.githubusercontent.com/kathirsvn/3cb07dd74bc20d0e079da432efc4e340/raw/d56646dcb8b14ab70dc4843908e336dc38ae9b53/http-jsonapi-crud-basic.yaml
+            - tags=block:delete
+            - threads=20
+            - errors=histogram
+            - namespace={{keyspace}}
+            - protocol=https
+            - jsonapi_port=443
+            - path_prefix=/api/json
+            - connections={{delete_connections}}
+            - docscount={{m_d_cycles}}
+  checkers:
+    verify_success:
+      checker: nofail
+
+  artifact_checkers:
+    process_hdr:
+      artifact_checker: hdrtool
