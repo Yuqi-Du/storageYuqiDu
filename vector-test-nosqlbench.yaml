@@ -12,7 +12,7 @@ description: >2
 scenarios:
   default:
     schema-collection:   run driver=http tags==block:schema-collection threads==1 cycles==UNDEF
-#    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 #    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 #    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 #    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
