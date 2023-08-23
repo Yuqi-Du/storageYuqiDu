@@ -12,7 +12,7 @@ description: >2
   1536 is a standard vector size that openAI embedding generates, using this size for benchmark
 scenarios:
   default:
-    schema:   run driver=http tags==block:schema threads==1 cycles==UNDEF
+    schema-collection:   run driver=http tags==block:schema-collection threads==1 cycles==UNDEF
     write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
     read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
     update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
@@ -40,7 +40,7 @@ bindings:
   vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
 
 blocks:
-  schema:
+  schema-collection:
     ops:
       delete-collection:
         method: POST
