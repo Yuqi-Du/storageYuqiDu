@@ -1,22 +1,21 @@
 min_version: "5.17.3"
 
-# Example command line
-# Against AstraDB
-# nb5 -v http-jsonapi-vector-crud docscount=1000 threads=20 jsonapi_host=Your-AstraDB-Host auth_token=Your-AstraDB-Token jsonapi_port=443 protocol=https path_prefix=/api/json namespace=Your-Keyspace
-# Against local JSON API
-# nb5 -v http-jsonapi-vector-crud jsonapi_host=localhost docscount=1000 threads=20
+# Example command line (when Stargate is running on localhost):
+# nb5 -v http-jsonapi-vector-crud jsonapi_host=localhost docscount=500 threads=20
 
 description: >2
   This workload emulates vector CRUD operations for Stargate JSON API.
   It requires a data set file (default vector-dataset.txt), where contains vectors of size 1536
   1536 is a standard vector size that openAI embedding generates, using this size for benchmark
+  Note that jsonapi_port should reflect the port where the Docs API is exposed (defaults to 8181).
+
 scenarios:
   default:
     schema-collection:   run driver=http tags==block:schema-collection threads==1 cycles==UNDEF
-    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
-    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
 
 bindings:
   # To enable an optional weighted set of hosts in place of a load balancer
@@ -24,7 +23,7 @@ bindings:
   #   single host: jsonapi_host=host1
   #   multiple hosts: jsonapi_host=host1,host2,host3
   #   multiple weighted hosts: jsonapi_host=host1:3,host2:7
-  weighted_hosts: WeightedStrings('<<jsonapi_host:jsonapi>>')
+  weighted_hosts: WeightedStrings('<<stargate_host:jsonapi>>')
 
   # spread into different spaces to use multiple connections
   space: HashRange(1,<<connections:20>>); ToString();
@@ -38,6 +37,7 @@ bindings:
   seq_key: Mod(<<docscount:500>>); ToString() -> String
   random_key: Uniform(0,<<docscount:500>>); ToString() -> String
   vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
+
 
 blocks:
   schema-collection:
@@ -56,6 +56,7 @@ blocks:
               "name": "<<collection:jsonapi_vector_crud_collection>>"
             }
           }
+
       create-collection:
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>
@@ -76,6 +77,7 @@ blocks:
               }
             }
           }
+
   write:
     ops:
       write-insert-one-vector:
@@ -116,6 +118,7 @@ blocks:
               "projection" : {"$vector" : 1}
             }
           }
+
       find-by-vector-projection:
         space: "{space}"
         method: POST
@@ -135,6 +138,8 @@ blocks:
               }
             }
           }
+
+
   update:
     ops:
       find-one-update-vector:
@@ -154,6 +159,7 @@ blocks:
                   "options" : {"returnDocument" : "after"}
               }
           }
+
   delete:
     ops:
       delete-document:
@@ -173,3 +179,4 @@ blocks:
               }
             }
           }
+
