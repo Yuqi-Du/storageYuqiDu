@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="secure-connect-json-api-fallout-test-database">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/secure-connect-json-api-fallout-test-database.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

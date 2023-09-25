@@ -1,0 +1,26 @@
+2023-09-08 07:12:33,864 [main] INFO : Configured scenario log at logs/nEODFje.log
+2023-09-08 07:12:33,869 [main] INFO : Running NoSQLBench Version 5.17.4-preview
+2023-09-08 07:12:33,870 [main] INFO : command-line: -v mongo_vector_crud_dataAPI docscount=10000 threads=100 --report-prompush-to http://127.0.0.1:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/zen_brahmagupta uri=https://us-west-2.aws.data.mongodb-api.com/app/data-fvelc/endpoint/data/v1 key=1PwepOs5phnQaQW4OcC3dtzTWxKKdhXSwY5J8CbGsVUEZBrnakzUsoyniYUF4Qez
+2023-09-08 07:12:34,299 [main] INFO : client-hardware: {"if-speeds":["0Mib","217Mib","9Mib"],"heap-max-GiB":"8.00","processor-name":"Apple M1 Pro","memory-GiB":"32.00","sockets":"1","logical-cores":"10","max-frequency-ghz":"0.00","physical-cores":"10"}
+2023-09-08 07:12:34,415 [main] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/mongo_vector_crud_dataAPI.yaml'
+2023-09-08 07:12:34,447 [main] INFO : {"layer":"Session","start":1694157154446,"end":1694157154446,"details":{"cli":"-v\nmongo_vector_crud_dataAPI\ndocscount\u003d10000\nthreads\u003d100\n--report-prompush-to\nhttp://127.0.0.1:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/zen_brahmagupta\nuri\u003dhttps://us-west-2.aws.data.mongodb-api.com/app/data-fvelc/endpoint/data/v1\nkey\u003d1PwepOs5phnQaQW4OcC3dtzTWxKKdhXSwY5J8CbGsVUEZBrnakzUsoyniYUF4Qez"}}
+2023-09-08 07:12:34,450 [main] INFO : PromPushReporter default configuration
+2023-09-08 07:12:34,451 [main] INFO : Reading Bearer Token from %s
+2023-09-08 07:12:34,451 [main] WARN : apikeyfile does not exist at '/Users/yuqi.du/.nosqlbench/prompush/prompush_apikey
+2023-09-08 07:12:34,453 [main] INFO : starting reporter: PromPushReporter
+2023-09-08 07:12:34,453 [main] INFO : starting reporter: Log4JMetricsReporter
+2023-09-08 07:12:34,454 [main] INFO : console logging level is INFO
+2023-09-08 07:12:34,459 [main] INFO : Charting disabled
+2023-09-08 07:12:34,460 [scenarios:001] INFO : {"layer":"Scenario","start":1694157154460,"end":1694157154460,"details":{"engine":"Graalvm"}}
+2023-09-08 07:12:35,032 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/mongo_vector_crud_dataAPI.yaml'
+2023-09-08 07:12:35,043 [scenarios:001] INFO : workload URI: 'file:///Users/yuqi.du/idea_workspace/storageYuqiDu/mongo_vector_crud_dataAPI.yaml'
+2023-09-08 07:12:35,296 [ACTIVITY:001] INFO : {"layer":"Activity","start":1694157155295,"end":1694157155295,"details":{"event":"start-activity","params":"ActivityDef:(9)/{driver\u003dhttp, threads\u003d100, workload\u003dmongo_vector_crud_dataAPI, alias\u003dwrite, cycles\u003d10000, errors\u003dtimer,warn, tags\u003dname:\"write.*\", labels\u003dworkload:$mongo_vector_crud_dataAPI}"}}
+2023-09-08 07:12:35,297 [ACTIVITY:001] INFO : defaulting stride to 1 (the sequence length)
+2023-09-08 07:12:35,297 [ACTIVITY:001] INFO : setting threads to 100 (direct)
+2023-09-08 07:12:35,299 [ACTIVITY:001] INFO : starting activity write for cycles [0..10000)=10000
+2023-09-08 07:12:35,299 [ACTIVITY:001] INFO : {"layer":"Activity","start":1694157155299,"end":1694157155299,"details":{"params":"ActivityDef:(9)/{driver\u003dhttp, threads\u003d100, workload\u003dmongo_vector_crud_dataAPI, alias\u003dwrite, cycles\u003d10000, stride\u003d1, errors\u003dtimer,warn, tags\u003dname:\"write.*\", labels\u003dworkload:$mongo_vector_crud_dataAPI}"}}
+2023-09-08 07:12:36,379 [Thread-6] WARN : Activity was interrupted by process exit, shutting down
+2023-09-08 07:12:36,379 [Thread-2] WARN : Scenario was interrupted by process exit, shutting down
+2023-09-08 07:12:36,379 [Thread-6] INFO : {"layer":"Activity","start":1694157155299,"end":1694157156379,"details":{"event":"stop-activity","params":"ActivityDef:(9)/{driver\u003dhttp, threads\u003d100, workload\u003dmongo_vector_crud_dataAPI, alias\u003dwrite, cycles\u003d10000, stride\u003d1, errors\u003dtimer,warn, tags\u003dname:\"write.*\", labels\u003dworkload:$mongo_vector_crud_dataAPI}"}}
+2023-09-08 07:12:36,380 [Thread-2] INFO : scenario state: Interrupted
+2023-09-08 07:12:36,380 [Thread-2] INFO : {"layer":"Scenario","start":1694157154460,"end":1694157156379,"details":{"event":"stop-scenario"}}

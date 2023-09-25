@@ -1,0 +1,207 @@
+9/8/23, 12:17:38 AM ============================================================
+
+-- Counters --------------------------------------------------------------------
+update.optracker_blocked
+             count = 0
+write.optracker_blocked
+             count = 0
+
+-- Histograms ------------------------------------------------------------------
+default.statuscode
+             count = 20000
+update.tries
+             count = 10000
+write.tries
+             count = 10000
+
+-- Timers ----------------------------------------------------------------------
+update.bind
+             count = 10000
+         mean rate = 80.03 calls/second
+     1-minute rate = 82.29 calls/second
+     5-minute rate = 87.37 calls/second
+    15-minute rate = 89.26 calls/second
+update.cycles_servicetime
+             count = 10000
+         mean rate = 80.03 calls/second
+     1-minute rate = 79.36 calls/second
+     5-minute rate = 73.74 calls/second
+    15-minute rate = 71.66 calls/second
+update.execute
+             count = 10000
+         mean rate = 80.01 calls/second
+     1-minute rate = 79.36 calls/second
+     5-minute rate = 73.74 calls/second
+    15-minute rate = 71.66 calls/second
+update.read_input
+             count = 10100
+         mean rate = 80.79 calls/second
+     1-minute rate = 81.20 calls/second
+     5-minute rate = 87.07 calls/second
+    15-minute rate = 89.15 calls/second
+update.result
+             count = 10000
+         mean rate = 79.98 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.result_success
+             count = 10000
+         mean rate = 79.96 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.strides_servicetime
+             count = 10000
+         mean rate = 79.94 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+write.bind
+             count = 10000
+         mean rate = 40.09 calls/second
+     1-minute rate = 10.39 calls/second
+     5-minute rate = 45.29 calls/second
+    15-minute rate = 55.69 calls/second
+write.cycles_servicetime
+             count = 10000
+         mean rate = 40.10 calls/second
+     1-minute rate = 10.23 calls/second
+     5-minute rate = 36.61 calls/second
+    15-minute rate = 40.62 calls/second
+write.execute
+             count = 10000
+         mean rate = 40.08 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 37.14 calls/second
+    15-minute rate = 41.53 calls/second
+write.read_input
+             count = 10100
+         mean rate = 40.49 calls/second
+     1-minute rate = 10.59 calls/second
+     5-minute rate = 45.59 calls/second
+    15-minute rate = 55.94 calls/second
+write.result
+             count = 10000
+         mean rate = 40.08 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 37.06 calls/second
+    15-minute rate = 41.38 calls/second
+write.result_success
+             count = 10000
+         mean rate = 40.07 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 36.97 calls/second
+    15-minute rate = 41.23 calls/second
+write.strides_servicetime
+             count = 10000
+         mean rate = 40.07 calls/second
+     1-minute rate = 10.23 calls/second
+     5-minute rate = 36.61 calls/second
+    15-minute rate = 40.62 calls/second
+
+
+9/8/23, 12:17:38 AM ============================================================
+
+-- Counters --------------------------------------------------------------------
+update.optracker_blocked
+             count = 0
+write.optracker_blocked
+             count = 0
+
+-- Histograms ------------------------------------------------------------------
+default.statuscode
+             count = 20000
+update.tries
+             count = 10000
+write.tries
+             count = 10000
+
+-- Timers ----------------------------------------------------------------------
+update.bind
+             count = 10000
+         mean rate = 79.80 calls/second
+     1-minute rate = 79.61 calls/second
+     5-minute rate = 86.74 calls/second
+    15-minute rate = 89.04 calls/second
+update.cycles_servicetime
+             count = 10000
+         mean rate = 79.80 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.execute
+             count = 10000
+         mean rate = 79.78 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.read_input
+             count = 10100
+         mean rate = 80.56 calls/second
+     1-minute rate = 81.20 calls/second
+     5-minute rate = 87.07 calls/second
+    15-minute rate = 89.15 calls/second
+update.result
+             count = 10000
+         mean rate = 79.76 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.result_success
+             count = 10000
+         mean rate = 79.74 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+update.strides_servicetime
+             count = 10000
+         mean rate = 79.73 calls/second
+     1-minute rate = 78.50 calls/second
+     5-minute rate = 73.66 calls/second
+    15-minute rate = 71.64 calls/second
+write.bind
+             count = 10000
+         mean rate = 40.04 calls/second
+     1-minute rate = 10.39 calls/second
+     5-minute rate = 45.29 calls/second
+    15-minute rate = 55.69 calls/second
+write.cycles_servicetime
+             count = 10000
+         mean rate = 40.04 calls/second
+     1-minute rate = 10.23 calls/second
+     5-minute rate = 36.61 calls/second
+    15-minute rate = 40.62 calls/second
+write.execute
+             count = 10000
+         mean rate = 40.03 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 37.14 calls/second
+    15-minute rate = 41.53 calls/second
+write.read_input
+             count = 10100
+         mean rate = 40.43 calls/second
+     1-minute rate = 10.59 calls/second
+     5-minute rate = 45.59 calls/second
+    15-minute rate = 55.94 calls/second
+write.result
+             count = 10000
+         mean rate = 40.03 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 37.06 calls/second
+    15-minute rate = 41.38 calls/second
+write.result_success
+             count = 10000
+         mean rate = 40.02 calls/second
+     1-minute rate = 10.26 calls/second
+     5-minute rate = 36.97 calls/second
+    15-minute rate = 41.23 calls/second
+write.strides_servicetime
+             count = 10000
+         mean rate = 40.02 calls/second
+     1-minute rate = 10.23 calls/second
+     5-minute rate = 36.61 calls/second
+    15-minute rate = 40.62 calls/second
+
+
+
