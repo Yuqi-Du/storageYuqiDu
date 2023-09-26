@@ -1,0 +1,85 @@
+min_version: "5.17.3"
+
+# Example command line
+# java -jar ~/nb5.jar -v mongo_vector_crud_dataAPI docscount=10000 threads=100 uri=https://us-west-2.aws.data.mongodb-api.com/app/data-fvelc/endpoint/data/v1 key=1PwepOs5phnQaQW4OcC3dtzTWxKKdhXSwY5J8CbGsVUEZBrnakzUsoyniYUF4Qez
+# java -jar ~/nb5.jar -v mongo_vector_crud_dataAPI docscount=10000 threads=100 uri=https://us-west-2.aws.data.mongodb-api.com/app/data-sosch/endpoint/data/v1 key=wB7HHKnNVYIKbKnVNaNtIzGUsmQqtGcPJZh8Zc9Mksi9arlWJvVdUhY15ElMebLs
+# java -jar ~/nb5.jar -v mongo_vector_crud_dataAPI docscount=10000 threads=100 --report-prompush-to http://127.0.0.1:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/zen_brahmagupta uri=https://us-west-2.aws.data.mongodb-api.com/app/data-sosch/endpoint/data/v1 key=wB7HHKnNVYIKbKnVNaNtIzGUsmQqtGcPJZh8Zc9Mksi9arlWJvVdUhY15ElMebLs
+# java -jar ~/nb5.jar -v mongo_vector_crud_dataAPI docscount=10000 threads=100 --report-prompush-to http://127.0.0.1:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/zen_brahmagupta uri=https://us-west-2.aws.data.mongodb-api.com/app/data-fvelc/endpoint/data/v1 key=1PwepOs5phnQaQW4OcC3dtzTWxKKdhXSwY5J8CbGsVUEZBrnakzUsoyniYUF4Qez
+
+#  "https://us-west-2.aws.data.mongodb-api.com/app/data-fvelc/endpoint/data/v1"
+#  "1PwepOs5phnQaQW4OcC3dtzTWxKKdhXSwY5J8CbGsVUEZBrnakzUsoyniYUF4Qez"
+#
+#  "https://us-west-2.aws.data.mongodb-api.com/app/data-sosch/endpoint/data/v1"
+#  "wB7HHKnNVYIKbKnVNaNtIzGUsmQqtGcPJZh8Zc9Mksi9arlWJvVdUhY15ElMebLs"
+
+
+description: >2
+  This workload emulates vector CRUD operations for MongoDB Data API
+  It requires a data set file (default vector-dataset.txt), where contains vectors of size 1536
+  1536 is a standard vector size that openAI embedding generates, using this size for benchmark
+
+
+scenarios:
+  default:
+#    schema:   run driver=http tags==block:schema threads==1 cycles==UNDEF
+    write:    run driver=http tags==name:"write.*" cycles===TEMPLATE(write-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    read:     run driver=http tags==name:"read.*" cycles===TEMPLATE(read-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+    update:   run driver=http tags==name:"update.*" cycles===TEMPLATE(update-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+#    delete:   run driver=http tags==name:"delete.*" cycles===TEMPLATE(delete-cycles,TEMPLATE(docscount,500)) threads=auto errors=timer,warn
+
+bindings:
+
+  seq_key: Mod(<<docscount:500>>); ToString() -> String
+  random_key: Uniform(0,<<docscount:500>>); ToString() -> String
+  vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
+
+blocks:
+  write:
+    ops:
+      write-insert-one-vector:
+        method: POST
+        uri: <<uri:xxx>>/action/insertOne
+        Content-Type: "application/json"
+        Api-key: <<key:xxx>>
+        ok-body: '.*\"insertedId\":.*'
+        body: >2
+          {
+            "dataSource": "Cluster0",
+            "database": "testdb1",
+            "collection": "testcollection",
+            "document": {
+              "_id" :         "{seq_key}",
+              "vector_c" :      {vector_json}
+            }
+          }
+  update:
+    ops:
+      find-one-update-vector:
+        method: POST
+        uri: <<uri:xxx>>/action/aggregate
+        Content-Type: "application/json"
+        Api-key: <<key:xxx>>
+        ok-body: '.*\"documents\":.*'
+        body: >2
+          {
+            "dataSource": "Cluster0",
+            "database": "testdb1",
+            "collection": "testcollection",
+            "pipeline": [
+              {
+                "$search": {
+                  "index": "vectorTestIndex",
+                  "knnBeta": {
+                    "vector": {vector_json},
+                    "path": "vector_c",
+                    "k": 1
+                  }
+                }
+              },
+              { "$set": {
+                "status": "active"
+              }
+              }
+            ]
+          }
+
