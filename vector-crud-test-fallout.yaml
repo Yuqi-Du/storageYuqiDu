@@ -1,6 +1,6 @@
 download_url: https://datastax-cluster-config-prod.s3.us-east-2.amazonaws.com/cc6478dd-2d0e-4576-87f1-fa3cbd3e10bb-1/secure-connect-testphotographyaws.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2AIQRQ76S2JCB77W%2F20230925%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230925T231831Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=cfcddf9d6b22397952825315a3e8646c02026dee10d97600fe85b45dbbbcd16c
 provider: ec2
-zone: us-east-2
+zone: us-west-2
 instance: m5.24xlarge
 token: token
 workload_duration: 50m
@@ -17,6 +17,7 @@ ops:
   - op: find-one-update-vector
   - op: delete-document
 
+#Yuqi Du
 ---
 
 ensemble:
@@ -71,7 +72,7 @@ workload:
         properties:
           alias: write
           service_type: stargate
-          cycles: {{write_cycles}}
+          cycles: {{docs_count}}
           args:
             - driver=http
             - workload={{workload_file}}
@@ -88,7 +89,7 @@ workload:
 
     -
       {{#ops}}
-        main_{{op}}:
+      main_{{op}}:
         module: nosqlbench
         properties:
           alias: main_{{op}}
