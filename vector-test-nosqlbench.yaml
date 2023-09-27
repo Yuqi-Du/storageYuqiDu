@@ -37,8 +37,8 @@ bindings:
 
   seq_key: Mod(<<docscount:500>>); ToString() -> String
   random_key: Uniform(0,<<docscount:500>>); ToString() -> String
-#  vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
-  vector_json: HashedFloatVectors(<<dimensions:1536>>); ToCqlVector()
+  vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
+#  vector_json: HashedFloatVectors(<<dimensions:1536>>); ToCqlVector()
 
 blocks:
   schema-collection:
