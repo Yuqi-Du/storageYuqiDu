@@ -79,8 +79,8 @@ blocks:
   write:
     ops:
       write-insert-one-vector:
-        params:
-          ratio: 5
+#        params:
+#          ratio: 5
         space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
@@ -116,25 +116,25 @@ blocks:
               "projection" : {"$vector" : 1}
             }
           }
-      find-by-vector-projection:
-        space: "{space}"
-        method: POST
-        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
-        Accept: "application/json"
-        X-Cassandra-Request-Id: "{request_id}"
-        X-Cassandra-Token: "{token}"
-        Content-Type: "application/json"
-        ok-body: ".*\"data\".*"
-        body: >2
-          {
-            "find": {
-              "sort" : {"$vector" : {vector_json}},
-              "projection" : {"$vector" : 1, "$similarity" : 1},
-              "options" : {
-                  "limit" : 10
-              }
-            }
-          }
+#      find-by-vector-projection:
+#        space: "{space}"
+#        method: POST
+#        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
+#        Accept: "application/json"
+#        X-Cassandra-Request-Id: "{request_id}"
+#        X-Cassandra-Token: "{token}"
+#        Content-Type: "application/json"
+#        ok-body: ".*\"data\".*"
+#        body: >2
+#          {
+#            "find": {
+#              "sort" : {"$vector" : {vector_json}},
+#              "projection" : {"$vector" : 1, "$similarity" : 1},
+#              "options" : {
+#                  "limit" : 10
+#              }
+#            }
+#          }
   update:
     ops:
       find-one-update-vector:
