@@ -37,7 +37,8 @@ bindings:
 
   seq_key: Mod(<<docscount:500>>); ToString() -> String
   random_key: Uniform(0,<<docscount:500>>); ToString() -> String
-  vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
+#  vector_json: HashedLineToString('<<dataset:vector-dataset.txt>>');
+  vector_json: HashedFloatVectors(<<dimensions:1536>>); ToCqlVector()
 
 blocks:
   schema-collection:
@@ -81,7 +82,7 @@ blocks:
       write-insert-one-vector:
 #        params:
 #          ratio: 5
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
@@ -101,7 +102,7 @@ blocks:
   read:
     ops:
       find-one-by-vector-projection:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
@@ -138,7 +139,7 @@ blocks:
   update:
     ops:
       find-one-update-vector:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
