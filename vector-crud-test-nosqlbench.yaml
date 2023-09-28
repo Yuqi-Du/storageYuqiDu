@@ -26,7 +26,7 @@ bindings:
   weighted_hosts: WeightedStrings('<<stargate_host:jsonapi>>')
 
   # spread into different spaces to use multiple connections
-  space: HashRange(1,<<connections:20>>); ToString();
+#  space: HashRange(1,<<connections:20>>); ToString();
 
   # http request id
   request_id: ToHashedUUID(); ToString();
@@ -95,7 +95,7 @@ blocks:
   write:
     ops:
       write-insert-one-vector:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
@@ -117,7 +117,7 @@ blocks:
   main:
     ops:
       find-one-by-vector-projection:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
@@ -134,7 +134,7 @@ blocks:
           }
 
       find-one-update-vector:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
@@ -152,7 +152,7 @@ blocks:
           }
 
       delete-document:
-        space: "{space}"
+#        space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:jsonapi_vector_crud_namespace>>/<<collection:jsonapi_vector_crud_collection>>
         Accept: "application/json"
