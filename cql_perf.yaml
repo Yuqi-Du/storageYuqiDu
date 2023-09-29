@@ -1,0 +1,126 @@
+min_version: "5.17.0"
+
+description: |
+  A workload with only text keys and text values.
+  The CQL Key-Value workload demonstrates the simplest possible schema with payload data. This is useful for measuring
+  system capacity most directly in terms of raw operations. As a reference point, it provides some insight around types of
+  workloads that are constrained around messaging, threading, and tasking, rather than bulk throughput.
+  During preload, all keys are set with a value. During the main phase of the workload, random keys from the known
+  population are replaced with new values which never repeat. During the main phase, random partitions are selected for
+  upsert, with row values never repeating.
+scenarios:
+  default:
+    schema: run driver=cql tags==block:schema threads==1 cycles==UNDEF
+    rampup: run driver=cql tags==block:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
+    main: run driver=cql tags==block:"main.*" cycles===TEMPLATE(main-cycles,10000000) threads=auto
+  astra:
+    schema: run driver=cql tags==block:schema-astra threads==1 cycles==UNDEF
+    rampup: run driver=cql tags==block:rampup cycles===TEMPLATE(rampup-cycles,10000000) threads=auto
+    main: run driver=cql tags==block:"main.*" cycles===TEMPLATE(main-cycles,10000000) threads=auto
+  basic_check:
+    schema: run driver=cql tags==block:schema threads==1 cycles==UNDEF
+    rampup: run driver=cql tags==block:rampup cycles===TEMPLATE(rampup-cycles,10) threads=auto
+    main: run driver=cql tags==block:"main.*" cycles===TEMPLATE(main-cycles,10) threads=auto
+
+bindings:
+  seq_key: Mod(TEMPLATE(keycount,50000000000L)); ToString() -> String
+  seq_value: Hash(); Mod(TEMPLATE(valuecount,50000000000L)); ToString() -> String
+  rw_key: TEMPLATE(keydist,Uniform(0,50000000000L)); ToString() -> String
+  rw_value: Hash(); TEMPLATE(valdist,Uniform(0,50000000000L)); ToString() -> String
+  vector_value: HashedFloatVectors(<<dimensions:1536>>); ToCqlVector()
+
+blocks:
+  reset-schema:
+    params:
+      cl: TEMPLATE(cl,LOCAL_QUORUM)
+      prepared: false
+    statements:
+      drop-index: |-
+        DROP INDEX IF EXISTS TEMPLATE(keyspace, baselines).TEMPLATE(table,keyvalue)_value_idx;
+      drop-table: |-
+        DROP TABLE IF EXISTS TEMPLATE(keyspace, baselines).TEMPLATE(table,keyvalue);
+
+  schema:
+    params:
+      cl: TEMPLATE(cl,LOCAL_QUORUM)
+      prepared: false
+    statements:
+      create-table: |
+        create table if not exists TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) (
+        key text,
+        value text,
+        PRIMARY KEY (key)
+        );
+  rampup:
+    params:
+      cl: TEMPLATE(write_cl,LOCAL_QUORUM)
+    ops:
+      rampup-insert: |
+        insert into TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue)
+        (key, value)
+        values ({seq_key},{seq_value});
+  main-read:
+    params:
+      ratio: 5
+      cl: TEMPLATE(read_cl,LOCAL_QUORUM)
+    statements:
+      main-select: |
+        select * from TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) where key={rw_key};
+
+
+  schema-with-vector:
+    params:
+      cl: TEMPLATE(cl,LOCAL_QUORUM)
+      prepared: false
+    statements:
+      create-table: |
+        create table if not exists TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) (
+        key text,
+        value text,
+        vector vector<float,<<dimensions:1536>>>,
+        PRIMARY KEY (key)
+        );
+  rampup-with-vector:
+    params:
+      cl: TEMPLATE(write_cl,LOCAL_QUORUM)
+    ops:
+      rampup-insert: |
+        insert into TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue)
+        (key, value, vector)
+        values ({seq_key},{seq_value}, {vector_value});
+  main-read-with-vector:
+    params:
+      ratio: 5
+      cl: TEMPLATE(read_cl,LOCAL_QUORUM)
+    statements:
+      main-select: |
+        select * from TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) where key={rw_key};
+
+  schema-with-text-sai:
+    params:
+      cl: TEMPLATE(cl,LOCAL_QUORUM)
+      prepared: false
+    statements:
+      create-table: |
+        create table if not exists TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) (
+        key text,
+        value text,
+        PRIMARY KEY (key)
+        );
+      create-secondary-index: |
+        CREATE CUSTOM INDEX IF NOT EXISTS ON TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) (value) USING 'StorageAttachedIndex';
+  rampup-with-text-sai:
+    params:
+      cl: TEMPLATE(write_cl,LOCAL_QUORUM)
+    ops:
+      rampup-insert: |
+        insert into TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue)
+        (key, value)
+        values ({seq_key},{seq_value});
+  main-read-with-text-sai:
+    params:
+      ratio: 5
+      cl: TEMPLATE(read_cl,LOCAL_QUORUM)
+    statements:
+      main-select: |
+        select * from TEMPLATE(keyspace,baselines).TEMPLATE(table,keyvalue) where value={rw_value};
