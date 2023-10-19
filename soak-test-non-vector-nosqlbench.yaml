@@ -355,33 +355,6 @@ blocks:
             }
           }
 
-      # update many
-      update-many-by-country:
-        space: "{space}"
-        method: POST
-        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:soak_namespace>>/<<collection:soak_collection>>
-        Accept: "application/json"
-        X-Cassandra-Request-Id: "{request_id}"
-        X-Cassandra-Token: "{token}"
-        Content-Type: "application/json"
-        ok-body: ".*\"status\".*"
-        body: >2
-          {
-            "updateMany" : {
-              "filter" : {
-                "address.primary.cc": "{country_code}"
-              },
-              "update": {
-                  "$set": {
-                    "married": {married}
-                  },
-                  "$push": {
-                    "children": "{full_name}"
-                  }
-              }
-            }
-          }
-
       # count by gender property
       count-by-group:
         space: "{space}"
