@@ -1,4 +1,4 @@
-download_url: https://github.com/Yuqi-Du/storageYuqiDu/raw/main/secure-connect-dev-test03.zip
+download_url: https://github.com/Yuqi-Du/storageYuqiDu/raw/main/secure-connect-dev-test01.zip
 provider: ec2
 zone: us-west-2
 instance: m5.24xlarge
@@ -6,27 +6,29 @@ token: dev_token
 workload_duration: 50m
 keyspace: testks
 workload_file: https://github.com/Yuqi-Du/storageYuqiDu/raw/main/soak-test-nosqlbench.yaml
+sort_groups: 25
 #dataset: https://github.com/Yuqi-Du/storageYuqiDu/raw/main/vector-dataset.txt
 client_count: 1
 docs_count: 10000
-op_cycles: 10000
-single_op_rate: 100
+single_op_cycles: 100
+single_op_rate: 20
 single_op_connections: 3
 
+
 ops:
-   - op: find-one-id
-   - op: find-by-in
-   - op: find-one-by-vector
-   - op: find-one-by-city
-   - op: find-multi-by-married-name-exists
-   - op: find-multi-by-married-name-exists-with-projection
-   - op: find-multi-find-by-group-sort-by-name
-   - op: find-one-by-name-newest-and-update-city
-   - op: delete-one-id
-   - op: write-insert-one-vector
-   - op: find-one-id-and-replace-upsert
-   - op: update-many-by-country
-   - op: count-by-group
+  - op: find-one-id
+  - op: find-by-in
+  - op: find-one-by-vector
+  - op: find-one-by-city
+  - op: find-multi-by-married-name-exists
+  - op: find-multi-by-married-name-exists-with-projection
+  - op: find-multi-find-by-group-sort-by-name
+  - op: find-one-by-name-newest-and-update-city
+#  - op: delete-one-id
+#  - op: write-insert-one-vector
+  - op: find-one-id-and-replace-upsert
+  - op: update-many-by-country
+  - op: count-by-group
 
 # DEFAULT PARAMETERS:
 # # region setup
@@ -38,7 +40,7 @@ ops:
 # client_provider: ec2
 # client_region: us-west-2
 # client_type: m5.24xlarge
-# client_nb_version: nosqlbench-4.17.26
+# client_nb_version: nosqlbench-4.17.26,untagged-f21b2fb973b28aef97cd
 #
 # workload_file: set-me
 #
@@ -51,12 +53,12 @@ ops:
 # sort_groups: 25
 #
 # # load setup:
-# # - total of 10000 ops split between 13 operations
-# # - each operation limited to 25ops/s, totals to 325ops/s
-# # - each operation will be executed by 3 clients, totals to 39 clients
-# op_cycles: 10000
-# op_rate: 25
-# op_connections: 3
+# # - each operation cycle: single-op-cycles 10000
+# # - each operation rate: limited to 25ops/s. notice that this rate may not be reached (upper bound)
+# # - totals rate: 11*25=275ops/s
+# # - each operation will be executed by 3 clients, totals to 3*11=33 clients
+#
+# in order to have a stable base of rows in the table, no delete in this soak test
 #
 # ops:
 #   - op: find-one-id
@@ -67,12 +69,10 @@ ops:
 #   - op: find-multi-by-married-name-exists-with-projection
 #   - op: find-multi-find-by-group-sort-by-name
 #   - op: find-one-by-name-newest-and-update-city
-#   - op: delete-one-id
-#   - op: write-insert-one-vector
 #   - op: find-one-id-and-replace-upsert
 #   - op: update-many-by-country
 #   - op: count-by-group
-# 
+
 ---
 
 ensemble:
@@ -98,7 +98,7 @@ ensemble:
     configuration_manager:
       - name: nosqlbench_ssh
         properties:
-          version: nosqlbench-4.17.26
+          version: 5.17.4-preview
 
 workload:
   phases:
@@ -139,20 +139,21 @@ workload:
             - docscount={{docs_count}}
             - threads=30
             - connections=30
-            - errors=retry
+            - errors=retry,warn
+
     -
       {{#ops}}
-        main_{{op}}:
+      main_{{op}}:
         module: nosqlbench
         properties:
           alias: main_{{op}}
           service_type: stargate
-          cycles: {{op_cycles}}
+          cycles: {{single_op_cycles}}
           args:
             - driver=http
             - workload={{workload_file}}
             - tags=block:main,name:.*{{op}}
-            - errors=histogram
+            - errors=histogram,warn
             - namespace={{keyspace}}
             - protocol=https
             - jsonapi_port=443

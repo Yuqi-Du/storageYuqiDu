@@ -94,7 +94,7 @@ blocks:
 
   write:
     ops:
-      write-insert-one-vector:
+      write-insert-one:
         space: "{space}"
         method: POST
         uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:soak_namespace>>/<<collection:soak_collection>>
@@ -346,8 +346,8 @@ blocks:
                 "children":     [],
                 "friends": [
                                 "{friend_id}"
-                ],
-                "$vector" : {vector_json}
+                ]
+          
               },
               "options": {
                 "upsert": true
