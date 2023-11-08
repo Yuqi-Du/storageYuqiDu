@@ -169,8 +169,7 @@ blocks:
           {
             "find" : {
               "filter" : {
-                "_id" : {"$in" : ["{seq_key}", "{seq_key}"]},
-                "gender" : {"$in" : ["{gender}","{gender}"]}
+                "_id" : {"$in" : ["{seq_key}", "{seq_key}"]}
               }
             }
           }
