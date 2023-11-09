@@ -213,6 +213,24 @@ blocks:
             }
           }
 
+      simple-find:
+        space: "{space}"
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:soak_namespace>>/<<collection:soak_collection>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"data\".*"
+        body: >2
+          {
+            "find" : {
+              "filter" : {
+                "married": true
+              }
+            }
+          }
+
       # aka find with $eq and $exist and $projection
       find-multi-by-married-name-exists-with-projection:
         space: "{space}"
