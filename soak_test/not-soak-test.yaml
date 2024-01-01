@@ -1,0 +1,209 @@
+min_version: "5.17.0"
+
+description: |
+  A workload with mixed operations of jsonapi.
+  Including ramp-up. ann, find, update, delete
+
+scenarios:
+  default:
+#    schema: run driver=http tags==block:schema threads==1 cycles==UNDEF
+#    rampup: run driver=http tags==block:rampup cycles===TEMPLATE(rampup-cycles,100) threads=auto
+    soak: run driver=http tags==block:soak-operations cycles===TEMPLATE(rampup-cycles,100) threads=auto
+
+
+
+bindings:
+  # To enable an optional weighted set of hosts in place of a load balancer
+  # Examples
+  #   single host: stargate_host=host1
+  #   multiple hosts: stargate_host=host1,host2,host3
+  #   multiple weighted hosts: stargate_host=host1:3,host2:7
+  weighted_hosts: WeightedStrings('<<jsonapi_host:<<stargate_host:localhost>>>>')
+
+  # spread into different spaces to use multiple connections
+  space: HashRange(1,<<connections:20>>); ToString();
+
+  # http request id
+  request_id: ToHashedUUID(); ToString();
+
+  # autogenerate auth token to use on API calls using configured uri/uid/password, unless one is provided
+  token: Discard(); Token('<<auth_token:>>','<<uri:http://localhost:8081/v1/auth>>', '<<uid:cassandra>>', '<<pswd:cassandra>>');
+
+  seq_key: Mod(<<docscount:10000>>); ToString() -> String
+  random_key: Uniform(0,<<docscount:10000>>); ToString() -> String
+
+  user_id: ToHashedUUID(); ToString() -> String
+  created_on: Uniform(1262304000,1577836800) -> long
+  group: HashRange(1,<<sort_groups:20>>); ToString();
+  gender: WeightedStrings('M:10;F:10;O:1')
+  full_name: FullNames()
+  married: ModuloToBoolean()
+  city: Cities()
+  country_code: CountryCodes()
+  lat: Uniform(-180d, 180d)
+  lng: Hash() -> long; Uniform(-180d, 180d)
+  friend_id: Add(-1); ToHashedUUID(); ToString() -> String
+
+
+  match1: Identity(); CoinFunc(0.5, FixedValue(0), FixedValue(1000))
+  match2: Identity(); CoinFunc(0.5, FixedValue("true"), FixedValue("false"))
+  match3: Identity(); CoinFunc(0.5, FixedValue("true"), FixedValue("false"))
+
+
+blocks:
+  schema:
+    ops:
+      delete-collection:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"ok\":1.*"
+        body: >2
+          {
+            "deleteCollection": {
+              "name": "<<collection:TEMPLATE(table,keyvalue)>>"
+            }
+          }
+      create-collection:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"ok\":1.*"
+        body: >2
+          {
+            "createCollection": {
+              "name": "<<collection:TEMPLATE(table,keyvalue)>>"
+            }
+          }
+
+  rampup:
+    ops:
+      insert-one:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>/<<collection:TEMPLATE(table,keyvalue)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: '.*\"insertedIds\":\[.*\].*'
+        body: >2
+          {
+            "insertOne" : {
+              "document" : {
+                "_id" :         "{seq_key}",
+                "user_id":      "{user_id}",
+                "created_on":   {created_on},
+                "group":        "{group}",
+                "gender":       "{gender}",
+                "full_name":    "{full_name}",
+                "married":      {married},
+                "address": {
+                  "primary": {
+                      "city":   "{city}",
+                      "cc":     "{country_code}"
+                  },
+                  "secondary":  {}
+                },
+                "coordinates": [
+                                {lat},
+                                {lng}
+                ],
+                "children":     [],
+                "friends": [
+                                "{friend_id}"
+                ],
+                "match1": {match1},
+                "match2": "{match2}",
+                "match3": {match3}
+              }
+            }
+          }
+  
+
+  soak-operations:
+    ops:
+      find-by-ne:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>/<<collection:TEMPLATE(table,keyvalue)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"data\".*"
+        body: >2
+          {
+            "find" : {
+              "filter" : {
+                "match3" : {"$ne":true}
+              },
+              "options": {
+                "limit": <<page_size,20>>
+              }
+            }
+          }        
+
+      find-by-exists-false:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>/<<collection:TEMPLATE(table,keyvalue)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"data\".*"
+        body: >2
+          {
+            "find" : {
+              "filter" : {
+                "coordinates" : {"$exists":false}
+              },
+              "options": {
+                "limit": <<page_size,20>>
+              }
+            }
+          }
+
+      find-by-id-nin:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>/<<collection:TEMPLATE(table,keyvalue)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"data\".*"
+        body: >2
+          {
+            "find" : {
+              "filter" : {
+                "_id" : {"$nin": ["{seq_key}"]}
+              },
+              "options": {
+                "limit": <<page_size,20>>
+              }
+            }
+          }          
+
+      find-by-nonId-nin:
+        method: POST
+        uri: <<protocol:http>>://{weighted_hosts}:<<jsonapi_port:8181>><<path_prefix:>>/v1/<<namespace:TEMPLATE(keyspace,baselines)>>/<<collection:TEMPLATE(table,keyvalue)>>
+        Accept: "application/json"
+        X-Cassandra-Request-Id: "{request_id}"
+        X-Cassandra-Token: "{token}"
+        Content-Type: "application/json"
+        ok-body: ".*\"data\".*"
+        body: >2
+          {
+            "find" : {
+              "filter" : {
+                "country_code" : {"$nin": ["{country_code}"]}
+              },
+              "options": {
+                "limit": <<page_size,20>>
+              }
+            }
+          }          
